@@ -3,11 +3,12 @@ import re
 from typing import Any, Dict, Optional
 
 JSON_RE = re.compile(r"\{[\s\S]*\}")
+THINK_RE = re.compile(r"<think>[\s\S]*?</think>", re.IGNORECASE)
 WRAP_RE = re.compile(r"<START>\s*(.*?)\s*<END>", re.DOTALL)
 
 
 def parse_json(text: str) -> Dict[str, Any]:
-    text = text.strip()
+    text = THINK_RE.sub("", text).strip()
     try:
         return json.loads(text)
     except json.JSONDecodeError:

@@ -1,0 +1,225 @@
+[
+  {
+    "id": 1,
+    "comment": "muốn học mà nhà ko có điều kiện mới là có điều =))))",
+    "result": {
+      "report": {
+        "topic": "Financial Constraints in Education",
+        "sentiment": "mixed",
+        "confidence": 0.75,
+        "rationale": "The comment expresses a desire to learn but also highlights financial limitations, indicating both motivation and frustration.",
+        "actions": [
+          "Explore scholarship opportunities",
+          "Research affordable educational programs",
+          "Seek financial aid resources",
+          "Connect with educational support groups"
+        ]
+      },
+      "evaluation": {
+        "is_match": true,
+        "issues": []
+      },
+      "rules_added": []
+    }
+  },
+  {
+    "id": 2,
+    "comment": "Đại học Cần Thơ 16tr 1 năm 😂",
+    "result": {
+      "report": {
+        "topic": "University Tuition",
+        "sentiment": "positive",
+        "confidence": 0.8,
+        "rationale": "The use of a laughing emoji suggests that the student finds the tuition fee amusing or surprisingly low, indicating a positive sentiment towards the affordability of Đại học Cần Thơ.",
+        "actions": [
+          "Encourage sharing of experiences about university costs",
+          "Provide information on financial aid options",
+          "Discuss the value of education at Đại học Cần Thơ"
+        ]
+      },
+      "evaluation": {
+        "is_match": true,
+        "issues": []
+      },
+      "rules_added": []
+    }
+  },
+  {
+    "id": 3,
+    "comment": "Sợ thật 700m chị có ny hưa ạ",
+    "result": {
+      "report": {
+        "topic": "Personal feelings about distance and relationships",
+        "sentiment": "mixed",
+        "confidence": 0.7,
+        "rationale": "The comment expresses fear regarding a distance of 700 meters, which suggests anxiety or concern, but it also mentions having a partner, indicating a positive aspect of support or companionship.",
+        "actions": [
+          "Encourage discussion about feelings related to distance",
+          "Suggest strategies for managing anxiety",
+          "Promote communication with partner about concerns"
+        ]
+      },
+      "evaluation": {
+        "is_match": true,
+        "issues": []
+      },
+      "rules_added": []
+    }
+  },
+  {
+    "id": 4,
+    "comment": "tao định thi vào đại học sản khấu điện ảnh",
+    "result": {
+      "report": {
+        "topic": "University Admission",
+        "sentiment": "positive",
+        "confidence": 0.85,
+        "rationale": "The student expresses a clear intention to apply to a specific university, indicating enthusiasm and a positive outlook towards their future education.",
+        "actions": [
+          "Research admission requirements",
+          "Prepare application materials",
+          "Explore financial aid options",
+          "Connect with current students or alumni"
+        ]
+      },
+      "evaluation": {
+        "is_match": true,
+        "issues": []
+      },
+      "rules_added": []
+    }
+  },
+  {
+    "id": 5,
+    "comment": "Sốc vs người cuối cùng 😂😅",
+    "result": {
+      "report": {
+        "topic": "Emotional Reaction",
+        "sentiment": "mixed",
+        "confidence": 0.8,
+        "rationale": "The use of emojis indicates a humorous and light-hearted reaction, but the word 'sốc' (shocked) suggests a mix of surprise or disbelief.",
+        "actions": [
+          "Encourage further discussion about the topic",
+          "Explore the reasons behind the shock",
+          "Share similar experiences to foster connection"
+        ]
+      },
+      "evaluation": {
+        "is_match": true,
+        "issues": []
+      },
+      "rules_added": []
+    }
+  },
+  {
+    "id": 6,
+    "comment": "Hồi mình học HUST học phí mới có 180k/ tín, 1 năm hết cỡ 8-9 triệu học phí 😂 Em gái chắc khoá mới vào r.",
+    "result": {
+      "report": {
+        "topic": "Tuition Fees at HUST",
+        "sentiment": "positive",
+        "confidence": 0.85,
+        "rationale": "The student expresses a positive sentiment about the low tuition fees at HUST, indicating satisfaction and nostalgia about their experience.",
+        "actions": [
+          "Encourage sharing of experiences about tuition fees",
+          "Highlight affordability of HUST in promotional materials",
+          "Engage with new students about financial aspects"
+        ]
+      },
+      "evaluation": {
+        "is_match": true,
+        "issues": []
+      },
+      "rules_added": []
+    }
+  },
+  {
+    "id": 7,
+    "comment": "toàn con đại gia :/",
+    "result": {
+      "report": {
+        "topic": "Perception of Wealthy Students",
+        "sentiment": "negative",
+        "confidence": 0.8,
+        "rationale": "The comment expresses a negative sentiment towards a group of students, implying a sense of discontent or frustration with their wealth or status.",
+        "actions": [
+          "Encourage open discussions about socioeconomic diversity",
+          "Provide support resources for students feeling marginalized",
+          "Organize events to foster inclusivity among students"
+        ]
+      },
+      "evaluation": {
+        "is_match": true,
+        "issues": []
+      },
+      "rules_added": []
+    }
+  },
+  {
+    "id": 8,
+    "comment": "Chị ấy làm VJ nha b ơii",
+    "result": {
+      "report": {
+        "topic": "Student's comment about a VJ",
+        "sentiment": "positive",
+        "confidence": 0.85,
+        "rationale": "The use of 'Chị ấy làm VJ' suggests admiration or positive recognition of someone's role as a VJ.",
+        "actions": [
+          "Encourage further discussion about VJ roles",
+          "Explore related topics in media studies",
+          "Provide resources on VJ skills and responsibilities"
+        ]
+      },
+      "evaluation": {
+        "is_match": true,
+        "issues": []
+      },
+      "rules_added": []
+    }
+  },
+  {
+    "id": 9,
+    "comment": "Sân Khấu Điện Ảnh là trường mà tôi muốn học",
+    "result": {
+      "report": {
+        "topic": "Sân Khấu Điện Ảnh",
+        "sentiment": "positive",
+        "confidence": 0.9,
+        "rationale": "The student expresses a desire to attend the Sân Khấu Điện Ảnh school, indicating a positive sentiment towards the institution.",
+        "actions": [
+          "Research admission requirements",
+          "Explore course offerings",
+          "Visit the campus if possible",
+          "Connect with current students or alumni"
+        ]
+      },
+      "evaluation": {
+        "is_match": true,
+        "issues": []
+      },
+      "rules_added": []
+    }
+  },
+  {
+    "id": 10,
+    "comment": "có gì cả",
+    "result": {
+      "report": {
+        "topic": "Student Engagement",
+        "sentiment": "neutral",
+        "confidence": 0.7,
+        "rationale": "The comment 'có gì cả' translates to 'What's up?' which indicates a neutral inquiry without expressing a clear positive or negative sentiment.",
+        "actions": [
+          "Encourage further engagement",
+          "Provide additional information",
+          "Ask for specific feedback"
+        ]
+      },
+      "evaluation": {
+        "is_match": true,
+        "issues": []
+      },
+      "rules_added": []
+    }
+  }
+]
