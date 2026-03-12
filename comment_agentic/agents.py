@@ -35,7 +35,7 @@ class LLMClient:
         return response.choices[0].message.content or ""
 
 
-class EvalAgent:
+class EvaluateAgent:
     def __init__(self, llm: LLMClient):
         self.llm = llm
 
@@ -55,7 +55,7 @@ class EvalAgent:
         return parse_json(self.llm.chat(system, user))
 
 
-class ReportJudgeAgent:
+class CriticAgent:
     def __init__(self, llm: LLMClient):
         self.llm = llm
 
@@ -106,7 +106,7 @@ class InferReasonAgent:
         return [r for r in reasons if isinstance(r, str)]
 
 
-class RefinePromptAgent:
+class InstructionEvolutionAgent:
     def __init__(self, llm: LLMClient):
         self.llm = llm
 
@@ -127,7 +127,7 @@ class RefinePromptAgent:
         return wrapped or response.strip()
 
 
-class AugmentAgent:
+class AmplifyAgent:
     def __init__(self, llm: LLMClient):
         self.llm = llm
 
@@ -141,7 +141,7 @@ class AugmentAgent:
         return [self.llm.chat(system, user).strip() for _ in range(sample_size)]
 
 
-class SelectionAgent:
+class SelectAgent:
     def select(
         self,
         prompts: List[str],
