@@ -9,15 +9,15 @@ from typing import Any, Dict, List, Optional
 from openai import OpenAI
 
 from agents import (
-    AugmentAgent,
+    AmplifyAgent,
     DetectErrorAgent,
-    EvalAgent,
+    EvaluateAgent,
     InferReasonAgent,
     LLMClient,
     LLMConfig,
-    RefinePromptAgent,
-    ReportJudgeAgent,
-    SelectionAgent,
+    InstructionEvolutionAgent,
+    CriticAgent,
+    SelectAgent,
 )
 from rag import RagConfig, RagIndex, format_context, read_docx
 
@@ -53,7 +53,10 @@ def load_jsonl(path: str, field: Optional[str]) -> List[Dict[str, Any]]:
                 comment = str(data)
 
             items.append(
-                {"id": data.get("id") if isinstance(data, dict) else None, "comment": str(comment)}
+                {
+                    "id": data.get("id") if isinstance(data, dict) else None,
+                    "comment": str(comment),
+                }
             )
     return items
 
@@ -68,13 +71,21 @@ def parse_args() -> argparse.Namespace:
         choices=["vllm", "openai"],
         help="LLM provider",
     )
-    parser.add_argument("--train", required=True, help="Path to JSONL training comments")
-    parser.add_argument("--val", default=None, help="Optional JSONL validation comments")
-    parser.add_argument("--knowledge", required=True, help="Path to knowledge/rules docx file")
+    parser.add_argument(
+        "--train", required=True, help="Path to JSONL training comments"
+    )
+    parser.add_argument(
+        "--val", default=None, help="Optional JSONL validation comments"
+    )
+    parser.add_argument(
+        "--knowledge", required=True, help="Path to knowledge/rules docx file"
+    )
     parser.add_argument(
         "--output", default="prompt_search_output.json", help="Path to output JSON"
     )
-    parser.add_argument("--field", default=None, help="JSON field containing the comment text")
+    parser.add_argument(
+        "--field", default=None, help="JSON field containing the comment text"
+    )
     parser.add_argument("--model", default=None, help="Model name")
     parser.add_argument("--embedding-model", default=None, help="Embedding model")
     parser.add_argument("--base-url", default=None)
@@ -224,26 +235,36 @@ def main() -> None:
             error_cases = []
 
             with ThreadPoolExecutor(max_workers=min(16, len(batch) or 1)) as executor:
-                results = list(executor.map(lambda item: evaluate_case(prompt, item), batch))
+                results = list(
+                    executor.map(lambda item: evaluate_case(prompt, item), batch)
+                )
 
             for item, result in zip(batch, results):
                 if detect_agent.detect(result["judge"]):
-                    error_cases.append({"comment": item["comment"], "judge": result["judge"]})
+                    error_cases.append(
+                        {"comment": item["comment"], "judge": result["judge"]}
+                    )
 
             if not error_cases:
                 logger.info("No error cases in this batch")
                 continue
 
-            errors_group = random.sample(error_cases, min(args.error_size, len(error_cases)))
+            errors_group = random.sample(
+                error_cases, min(args.error_size, len(error_cases))
+            )
             for err in errors_group:
-                reasons = infer_agent.infer(prompt, err["comment"], err["judge"], args.num_feedbacks)
+                reasons = infer_agent.infer(
+                    prompt, err["comment"], err["judge"], args.num_feedbacks
+                )
                 refined = refine_agent.refine(prompt, err["comment"], reasons)
                 augmented = augment_agent.augment(refined, args.augmentation)
                 candidate_prompts.extend([refined] + augmented)
 
         prompt_history.extend(candidate_prompts)
         if candidate_prompts:
-            logger.info("Selecting best prompts from %d candidates", len(candidate_prompts))
+            logger.info(
+                "Selecting best prompts from %d candidates", len(candidate_prompts)
+            )
             beam = selection_agent.select(
                 candidate_prompts,
                 train_data,
@@ -267,7 +288,9 @@ def main() -> None:
     ]
     scored.sort(key=lambda x: x["avg_score"], reverse=True)
     best_prompt = scored[0]["prompt"] if scored else DEFAULT_PROMPT
-    logger.info("Best prompt average score: %.3f", scored[0]["avg_score"] if scored else 0.0)
+    logger.info(
+        "Best prompt average score: %.3f", scored[0]["avg_score"] if scored else 0.0
+    )
 
     output = {
         "best_prompt": best_prompt,

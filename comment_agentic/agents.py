@@ -25,7 +25,9 @@ class LLMClient:
     def chat(self, system: str, user: str, temperature: float = None) -> str:
         response = self.client.chat.completions.create(
             model=self.config.model,
-            temperature=temperature if temperature is not None else self.config.temperature,
+            temperature=(
+                temperature if temperature is not None else self.config.temperature
+            ),
             messages=[
                 {"role": "system", "content": system},
                 {"role": "user", "content": user},
@@ -59,7 +61,9 @@ class CriticAgent:
     def __init__(self, llm: LLMClient):
         self.llm = llm
 
-    def score(self, context: str, comment: str, report: Dict[str, Any]) -> Dict[str, Any]:
+    def score(
+        self, context: str, comment: str, report: Dict[str, Any]
+    ) -> Dict[str, Any]:
         system = "You are a strict evaluator. Output JSON only."
         user = (
             "Retrieved Context:\n"
@@ -88,7 +92,9 @@ class InferReasonAgent:
     def __init__(self, llm: LLMClient):
         self.llm = llm
 
-    def infer(self, prompt: str, comment: str, judge: Dict[str, Any], max_reasons: int) -> List[str]:
+    def infer(
+        self, prompt: str, comment: str, judge: Dict[str, Any], max_reasons: int
+    ) -> List[str]:
         system = "You analyze root causes. Output JSON only."
         user = (
             "Task: Provide root causes for why the report failed.\n"
@@ -168,7 +174,7 @@ class SelectAgent:
                 else:
                     ucb_values.append(
                         rewards[i] / selections[i]
-                        + explore_param * ((t ** 0.5) / selections[i])
+                        + explore_param * ((t**0.5) / selections[i])
                     )
             selected_idx = ucb_values.index(max(ucb_values))
             prompt = prompts[selected_idx]
