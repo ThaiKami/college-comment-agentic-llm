@@ -128,8 +128,8 @@ def compute_average_score(
     prompt: str,
     data: List[Dict[str, Any]],
     context_fetcher,
-    evaluator: EvalAgent,
-    judge: ReportJudgeAgent,
+    evaluator: EvaluateAgent,
+    judge: InferReasonAgent,
 ) -> float:
     scores: List[float] = []
     for item in data:
@@ -207,13 +207,13 @@ def main() -> None:
     rag.build(knowledge)
     logger.info("Built RAG index with %d chunks", len(rag.chunks))
 
-    eval_agent = EvalAgent(llm)
-    judge_agent = ReportJudgeAgent(llm)
+    eval_agent = EvaluateAgent(llm)
+    judge_agent = InferReasonAgent(llm)
     detect_agent = DetectErrorAgent(threshold=args.threshold)
     infer_agent = InferReasonAgent(llm)
-    refine_agent = RefinePromptAgent(llm)
-    augment_agent = AugmentAgent(llm)
-    selection_agent = SelectionAgent()
+    refine_agent = InstructionEvolutionAgent(llm)
+    augment_agent = AmplifyAgent(llm)
+    selection_agent = SelectAgent()
 
     beam = [DEFAULT_PROMPT]
     prompt_history: List[str] = []
